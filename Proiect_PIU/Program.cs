@@ -4,10 +4,13 @@ namespace Proiect_PIU
 {
     class Program
     {
+        static bool[] disponibilitateMasini = new bool[3];
         static void Main()
         {
             Masini[] masini = new Masini[3];
             int nrMasini = 0;
+            string numeFisier = "inchirieri_masini.txt"; // Numele fișierului pentru stocarea închirierilor de mașini
+            AdministrareInchirieriMasini_FisierText adminInchirieri = new AdministrareInchirieriMasini_FisierText(numeFisier);
 
             string optiune;
             do
@@ -15,7 +18,9 @@ namespace Proiect_PIU
                 Console.WriteLine("1. Adaugare masina");
                 Console.WriteLine("2. Afisare masini");
                 Console.WriteLine("3. Cautare masina");
-                Console.WriteLine("4. Iesire");
+                Console.WriteLine("4. Adaugare inchiriere masina");
+                Console.WriteLine("5. Afisare inchirieri masini");
+                Console.WriteLine("6. Iesire");
 
                 Console.WriteLine("Alegeti o optiune:");
                 optiune = Console.ReadLine();
@@ -23,7 +28,9 @@ namespace Proiect_PIU
                 switch (optiune)
                 {
                     case "1":
-                        masini[nrMasini++] = GestionareDateTastatura.CitireMasina();
+                        Masini masinaNoua = GestionareDateTastatura.CitireMasina();
+                        masini[nrMasini++] = masinaNoua;
+                        disponibilitateMasini[nrMasini - 1] = masinaNoua.Disponibila;
                         break;
                     case "2":
                         Console.WriteLine("Informatii despre masini:");
@@ -50,13 +57,41 @@ namespace Proiect_PIU
                             Console.WriteLine("Masina nu a fost gasita in sistem.");
                         break;
                     case "4":
-                        Console.WriteLine("Programul se închide...");
+                        // Citirea datelor pentru închiriere
+                        Console.WriteLine("Introduceti numele clientului:");
+                        string numeClient = Console.ReadLine();
+                        Console.WriteLine("Introduceti denumirea masinii:");
+                        string denumireMasina = Console.ReadLine();
+                        Console.WriteLine("Introduceti data inchirierii :");
+                        string dataInchiriere = Console.ReadLine();
+
+                        bool disponibilitate = disponibilitateMasini[Array.FindIndex(masini, m => m.Denumire == denumireMasina)];
+
+                        // Crearea obiectului InchirieriMasini
+                        InchirieriMasini inchiriere = new InchirieriMasini(numeClient, new Masini(denumireMasina, disponibilitate), dataInchiriere);
+
+                        // Adăugarea închirierii în fișier
+                        adminInchirieri.AdaugaInchiriere(inchiriere);
+                        Console.WriteLine("Inchiriere adaugata cu succes.");
+                        break;
+                    case "5":
+                        // Afișarea închirierilor de mașini din fișier
+                        Console.WriteLine("Inchirierile de masini sunt:");
+                        int nrInchirieri;
+                        InchirieriMasini[] inchirieri = adminInchirieri.GetInchirieri(out nrInchirieri);
+                        foreach (InchirieriMasini inchiriereTemp in inchirieri)
+                        {
+                            Console.WriteLine(inchiriereTemp.Info());
+                        }
+                        break;
+                    case "6":
+                        Console.WriteLine("Programul se nchide...");
                         break;
                     default:
                         Console.WriteLine("Optiune invalida.");
                         break;
                 }
-            } while (optiune != "4");
+            } while (optiune != "6");
 
             Console.ReadKey();
         }

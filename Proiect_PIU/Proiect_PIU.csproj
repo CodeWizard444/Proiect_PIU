@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministrareInchirieriMasini_FisierText.cs" />
+    <Compile Include="InchiriereMasini.cs" />
     <Compile Include="GestionareDateTastatura.cs" />
     <Compile Include="Masini.cs" />
     <Compile Include="Program.cs" />
@@ -50,6 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="inchirieri_masini.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
