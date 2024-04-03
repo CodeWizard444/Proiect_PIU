@@ -13,7 +13,23 @@ namespace Proiect_PIU
             Console.WriteLine("Este masina disponibila? (da/nu)");
             bool disponibila = Console.ReadLine().ToLower() == "da";
 
-            return new Masini { Denumire = denumire, Disponibila = disponibila };
+            Console.WriteLine("Introduceti culoarea masinii (Rosu/Alb/Negru/Verde/Galben):");
+            Culori culoare = (Culori)Enum.Parse(typeof(Culori), Console.ReadLine(), true);
+
+            Console.WriteLine("Introduceti opțiunile masinii (AerConditionat, Navigatie, CutieAutomata,HeadUpDisplay,PanoramicRooftop,ScauneIncalzite):");
+            string[] optiuniString = Console.ReadLine().Split(',');
+            Optiuni optiuni = 0;
+            foreach (string optiune in optiuniString)
+            {
+                Optiuni optiuneEnum;
+                if (Enum.TryParse(optiune.Trim(), true, out optiuneEnum))
+                {
+                    optiuni |= optiuneEnum;
+                }
+            }
+
+            return new Masini { Denumire = denumire, Disponibila = disponibila, Culoare = culoare, OptiuniMasina = optiuni };
         }
     }
+    
 }
