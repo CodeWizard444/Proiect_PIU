@@ -10,15 +10,16 @@ namespace Proiect_PIU
         public AdministrareInchirieriMasini_FisierText(string numeFisier)
         {
             this.numeFisier = numeFisier;
-            // Se încearcă deschiderea fișierului în modul OpenOrCreate, astfel încât să fie creat dacă nu există
-            File.WriteAllText(numeFisier, ""); // Se șterge conținutul fișierului, dacă există
+            // Dacă fișierul nu există, acesta va fi creat automat
+            if (!File.Exists(numeFisier))
+            {
+                File.Create(numeFisier).Close(); // Crează fișierul și-l închide imediat
+            }
         }
 
         public void AdaugaInchiriere(InchirieriMasini inchiriere)
         {
-            // Instrucțiunea 'using' va apela la final streamWriterFisierText.Close();
-            // Al doilea parametru setat la 'true' al constructorului StreamWriter indică
-            // modul 'append' de deschidere al fișierului
+            // Folosind StreamWriter cu parametrul true, se deschide fișierul pentru scriere fără a-l șterge
             using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisier, true))
             {
                 streamWriterFisierText.WriteLine(inchiriere.Info()); // Se scrie informația despre închiriere în fișier
@@ -45,7 +46,7 @@ namespace Proiect_PIU
                     {
                         string numeClient = infoInchiriere[0].Trim();
                         string denumireMasina = infoInchiriere[1].Trim();
-                        bool disponibilitate = infoInchiriere[2].Trim().Equals("da", StringComparison.OrdinalIgnoreCase);
+                        bool disponibilitate = infoInchiriere[2].Trim().Equals("disponibila", StringComparison.OrdinalIgnoreCase);
                         string dataInchiriere = infoInchiriere[3].Trim();
 
                         // Se adaugă închirierea în tabloul de închirieri

@@ -1,0 +1,4 @@
+Client: John Smith, Aston Martin DBS, Culoare: Rosu, disponibila, Stare masina: disponibila, Data inchiriere: 24.12.2024
+Client: Lacatus Eduard, Audi Rs7, Culoare: Rosu, disponibila, Stare masina: disponibila, Data inchiriere: 25.06.2024
+Client: Andrew Tate, Mercedes AMG GT63s, Culoare: Rosu, , Stare masina: disponibila, Data inchiriere: 02.07.2024
+

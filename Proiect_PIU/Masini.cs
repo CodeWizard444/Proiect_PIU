@@ -48,7 +48,7 @@ namespace Proiect_PIU
         {
             string stare = Disponibila ? "disponibila" : "indisponibila";
             string infoOptiuni = OptiuniMasina != 0 ? ", Optiuni: " + OptiuniMasina.ToString() : "";
-            return $"{Denumire}, Culoare: {Culoare}, {stare}{infoOptiuni}";
+            return $"{Denumire}, Culoare: {Culoare} ";
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Proiect_PIU
             Console.WriteLine("Introduceti culoarea masinii (Rosu/Alb/Negru/Verde/Galben):");
             Culori culoare = (Culori)Enum.Parse(typeof(Culori), Console.ReadLine(), true);
 
-            Console.WriteLine("Introduceti opțiunile masinii (AerConditionat, Navigatie, CutieAutomata,HeadUpDisplay,PanoramicRooftop,ScauneIncalzite):");
+            Console.WriteLine("Introduceti optiunile masinii (AerConditionat, Navigatie, CutieAutomata,HeadUpDisplay,PanoramicRooftop,ScauneIncalzite):");
             string[] optiuniString = Console.ReadLine().Split(',');
             Optiuni optiuni = 0;
             foreach (string optiune in optiuniString)

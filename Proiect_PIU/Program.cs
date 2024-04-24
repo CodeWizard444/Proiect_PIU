@@ -85,7 +85,7 @@ namespace Proiect_PIU
                         }
                         break;
                     case "6":
-                        Console.WriteLine("Programul se nchide...");
+                        Console.WriteLine("Programul se inchide...");
                         break;
                     default:
                         Console.WriteLine("Optiune invalida.");
